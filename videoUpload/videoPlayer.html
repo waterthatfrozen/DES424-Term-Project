@@ -1,0 +1,47 @@
+<!-- Azure Media Player -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azure Media Player</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link href="//amp.azure.net/libs/amp/1.0.0/skins/amp-default/azuremediaplayer.min.css" rel="stylesheet">
+    <script src= "//amp.azure.net/libs/amp/1.0.0/azuremediaplayer.min.js"></script>
+</head>
+<body>
+    <p><a href="/demoLanding">Back</a></p>
+    <h1>Azure Media Player</h1>
+    <video id="vid1" class="azuremediaplayer amp-default-skin" autoplay controls width="640" height="400" poster="poster.jpg" data-setup='{"nativeControlsForTouch": false}'>
+        <source src="https://quickvid-aaea.streaming.media.azure.net/6fd21964-49a8-4cc5-932f-3383f2778c69/MVI_6293.ism/manifest" type="application/vnd.ms-sstr+xml" />
+        <p class="amp-no-js">
+            To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video
+        </p>
+    </video>
+    
+</body>
+<script>
+    amp.options.flashSS.swf = "//amp.azure.net/libs/amp/1.0.0/techs/StrobeMediaPlayback.2.0.swf";
+    amp.options.silverlightSS.xap = "//amp.azure.net/libs/amp/1.0.0/techs/SmoothStreamingPlayer.xap";
+    var myPlayer = amp('vid1', { /* Options */
+            "nativeControlsForTouch": false,
+            autoplay: false,
+            controls: true,
+            width: "640",
+            height: "400",
+            poster: ""
+        }, function() {
+              console.log('Good to go!');
+               // add an event listener
+              this.addEventListener('ended', function() {
+                console.log('Finished!');
+            });
+          }
+    );
+    myPlayer.src([{
+        src: "https://quickvid-aaea.streaming.media.azure.net/6fd21964-49a8-4cc5-932f-3383f2778c69/MVI_6293.ism/manifest",
+        type: "application/vnd.ms-sstr+xml"
+    }]);
+</script>
+</html>

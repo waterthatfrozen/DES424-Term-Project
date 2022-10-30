@@ -10,7 +10,7 @@ const http = require('http'),
     path = require('path'),
     app = express();
 
-const PATH = __dirname + '/client';  
+const PATH = __dirname;
 const PORT = process.env.PORT || 5000;
 
 // check for session is expired or not
@@ -74,6 +74,10 @@ http.createServer(app).listen(PORT, () => {
 
 // set the routes
 app.get('/', (req, res) => { res.send({message: 'Welcome to QikVid API'}); });
+app.get('/demoLanding', (req,res) => { res.sendFile(path.join(PATH, '/videoUpload/demoLanding.html')); });
+app.get('/uploadDemo', (req, res) => { res.sendFile(path.join(PATH, '/videoUpload/listener-axios-cdn.html')); });
+app.get('/uploadAssetDemo', (req,res) => {res.sendFile(path.join(PATH, '/videoUpload/upload-ams-asset.html')); });
+app.get('/playVideo', (req,res) => {res.sendFile(path.join(PATH,'/videoUpload/videoPlayer.html')); })
 
 // api routes
 const playground = require('./api/playground');

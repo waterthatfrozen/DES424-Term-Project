@@ -9,10 +9,13 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
+    <a href="/demoLanding">Back</a>
+    <h1>Basic Video Upload</h1>
     <form id="form">
         <input type="file" name="file" accept="video/*">
         <button type="submit">Submit</button>
-      </form>
+    </form>
+    
 </body>
 <script>
   const form = document.querySelector("form");
@@ -21,9 +24,16 @@
     e.preventDefault();
     const formData = new FormData(form);
     console.log([...formData]);
+    let pattern = /video\/.*/;
+    let file = formData.get('file');
+    if (!file.type.match(pattern)){
+      alert("Please select a video file");
+      return;
+    }else{
     axios.post('https://quickvidapp.azurewebsites.net/api/videoUpload', formData)
-      .then(res => console.log(res))
-      .catch(err => console.log(err))
+      .then(res => {console.log(res); alert("Video Uploaded Successfully")})
+      .catch(err => {console.log(err); alert("Video Upload Failed")});
+    }
   });
 </script>
 </html>
