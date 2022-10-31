@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>All Video Lists</title>
+</head>
+<body>
+    <a href="/demoLanding">Back</a>
+    <h1>All Video Lists</h1>
+    <ul id="videoList">
+        <li id="loading">Loading...</li>
+    </ul>
+</body>
+
+<script>
+    const videoList = document.querySelector("#videoList");
+    axios.get('https://quickvidapp.azurewebsites.net/api/listStreamingPath').then(res => {
+            console.log(res.data);
+            let allPaths = res.data.streamingPaths;
+            document.getElementById("loading").remove();
+            if(allPaths.length == 0){
+                videoList.innerHTML = "No video uploaded yet :( <br/> <a href='/uploadAssetDemo'>Upload Video to Azure Media Service Asset</a>";
+            }else{
+                allPaths.forEach(path => {
+                    console.log(path);
+                    console.log(path.streamingPath);
+                    console.log(path.locatorName);
+                    console.log(path.assetName);
+                    let li = document.createElement("li");
+                    let a = document.createElement("a");
+                    a.href = "/videoPlayer?manifestPath="+path.streamingPath+"&locatorName="+path.locatorName+"&assetName="+path.assetName;
+                    a.innerText = path.assetName;
+                    li.appendChild(a);
+                    videoList.appendChild(li);
+                });
+            }
+    }).catch(err => console.log(err));
+</script>
+</html>

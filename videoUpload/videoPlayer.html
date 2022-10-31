@@ -11,17 +11,26 @@
     <script src= "//amp.azure.net/libs/amp/1.0.0/azuremediaplayer.min.js"></script>
 </head>
 <body>
-    <p><a href="/demoLanding">Back</a></p>
+    <p><a href="/listVideo">Back to All Video List</a> | <a href="/demoLanding">Back to Main Demo</a></p>
     <h1>Azure Media Player</h1>
-    <video id="vid1" class="azuremediaplayer amp-default-skin" autoplay controls width="640" height="400" poster="poster.jpg" data-setup='{"nativeControlsForTouch": false}'>
-        <source src="https://quickvid-aaea.streaming.media.azure.net/6fd21964-49a8-4cc5-932f-3383f2778c69/MVI_6293.ism/manifest" type="application/vnd.ms-sstr+xml" />
+    <video id="vid1" class="azuremediaplayer amp-default-skin" autoplay controls width="640" height="400" poster="poster.jpg">
+        <source src="" type="application/vnd.ms-sstr+xml" />
         <p class="amp-no-js">
             To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video
         </p>
     </video>
+    <br/>
+    <a href="#" id="deleteLink" onclick="window.confirm('Do you want to delete this video?')">Delete Video</a>
     
 </body>
 <script>
+    let queryParam = window.location.search.substr(1);
+    queryParam = queryParam.split("&");
+    console.log(queryParam);
+    let videoManifest = queryParam[0].split("=")[1];
+    let locatorName = queryParam[1].split("=")[1];
+    let assetName = queryParam[2].split("=")[1];
+    console.log(videoManifest);
     amp.options.flashSS.swf = "//amp.azure.net/libs/amp/1.0.0/techs/StrobeMediaPlayback.2.0.swf";
     amp.options.silverlightSS.xap = "//amp.azure.net/libs/amp/1.0.0/techs/SmoothStreamingPlayer.xap";
     var myPlayer = amp('vid1', { /* Options */
@@ -40,8 +49,18 @@
           }
     );
     myPlayer.src([{
-        src: "https://quickvid-aaea.streaming.media.azure.net/6fd21964-49a8-4cc5-932f-3383f2778c69/MVI_6293.ism/manifest",
+        src: "https://quickvid-aaea.streaming.media.azure.net/"+videoManifest,
         type: "application/vnd.ms-sstr+xml"
     }]);
+    let deleteLink = document.getElementById("deleteLink");
+    deleteLink.addEventListener("click", function(){
+        console.log("delete");
+        console.log(locatorName, assetName);
+        axios.delete('https://quickvidapp.azurewebsites.net/api/deleteVideoAsset?assetName='+assetName+'&locatorName='+locatorName).then(res => {
+            console.log(res.data);
+            alert("Video deleted successfully!");
+            window.location.href = "/listVideo";
+        }).catch(err => { alert('Failed to delete video\n'+err.message); console.log(err);});
+    });
 </script>
 </html>

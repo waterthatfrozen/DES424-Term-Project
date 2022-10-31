@@ -1,0 +1,45 @@
+<!--Basic video upload form-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axios Post Request to Send Text & Image</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <a href="/demoLanding">Back</a>
+    <h1>Upload to Azure Media Service Asset</h1>
+    <form id="form">
+        <input type="file" name="file" accept="video/*">
+        <button type="submit">Submit</button>
+    </form>
+    <p>Status: <br/><span id="status">---</span></p>
+    <p>Response: <br/><span id="response">---</span></p>
+</body>
+<script>
+  const form = document.querySelector("form");
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    document.getElementById("status").innerText = "Uploading...";
+    console.log([...formData]);
+    let pattern = /video\/.*/;
+    let file = formData.get('file');
+    if (!file.type.match(pattern)){
+      alert("Please select a video file");
+      return;
+    }else{
+    axios.post('https://quickvidapp.azurewebsites.net/api/createVideoAsset', formData)
+      .then(res => {
+        console.log(res);
+        alert("Video Uploaded Successfully"); 
+        document.getElementById("status").innerText = "Uploaded";
+        document.getElementById("response").innerText = JSON.stringify(res.data, null, 2);
+      }).catch(err => {console.log(err); alert("Video Upload Failed")});
+    }
+  });
+</script>
+</html>

@@ -77,7 +77,8 @@ app.get('/', (req, res) => { res.send({message: 'Welcome to QikVid API'}); });
 app.get('/demoLanding', (req,res) => { res.sendFile(path.join(PATH, '/videoUpload/demoLanding.html')); });
 app.get('/uploadDemo', (req, res) => { res.sendFile(path.join(PATH, '/videoUpload/listener-axios-cdn.html')); });
 app.get('/uploadAssetDemo', (req,res) => {res.sendFile(path.join(PATH, '/videoUpload/upload-ams-asset.html')); });
-app.get('/playVideo', (req,res) => {res.sendFile(path.join(PATH,'/videoUpload/videoPlayer.html')); })
+app.get('/listVideo', (req,res) => {res.sendFile(path.join(PATH, '/videoUpload/videoList.html')); });
+app.get('/videoPlayer', (req,res) => {res.sendFile(path.join(PATH,'/videoUpload/videoPlayer.html')); })
 
 // api routes
 const playground = require('./api/playground');
