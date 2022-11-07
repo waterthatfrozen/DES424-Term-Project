@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "./assets/logo.png";
+import axios from "axios";
 
 export default function SignupPage() {
   const [formdata, setFormData] = React.useState({
@@ -25,6 +26,11 @@ export default function SignupPage() {
     event.preventDefault();
     // check if same email or username in database
     if (formdata.password === formdata.passwordConfrim) {
+      axios.post('https://quickvidapp.azurewebsites.net/api/signUp', {
+      username: formdata.username,
+      email: formdata.email,
+      password: formdata.password
+      })
       console.log("Successfully signup!");
       console.log(formdata);
     } else {
