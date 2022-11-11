@@ -81,7 +81,7 @@ app.get('/listVideo', (req,res) => {res.sendFile(path.join(PATH, '/videoUpload/v
 app.get('/videoPlayer', (req,res) => {res.sendFile(path.join(PATH,'/videoUpload/videoPlayer.html')); })
 
 // api routes
-const playground = require('./api/playground');
+const playground = require('./api/helloWorld');
 app.get('/api/hello', playground.helloWorld);
 app.get('/api/testBackend', (req, res) => { res.send({message: 'Express is connected!'}); });
 
