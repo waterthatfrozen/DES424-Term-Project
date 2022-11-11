@@ -1,0 +1,59 @@
+{
+  "userInfo": [
+    {
+      "id": 1,
+      "username": "sweet_kristy",
+      "userImg": "https://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg.jpg?fit=640,427",
+      "videoDiscription": "Should put",
+      "assetName": "stream-ignite-redact.mp4-668328bd-dba7-4448-860b-6ecb9fd7290d-output",
+      "locatorName": "locator-668328bd-dba7-4448-860b-6ecb9fd7290d",
+      "streamingPath": "/9c83219e-8926-4533-9e53-0515631d9fa6/ignite-redact.ism/manifest",
+      "ampTestUrl": "http://ampdemo.azureedge.net/?url=https://quickvid-aaea.streaming.media.azure.net/9c83219e-8926-4533-9e53-0515631d9fa6/ignite-redact.ism/manifest"
+    },
+    {
+      "id": 2,
+      "username": "kristy_honey",
+      "userImg": "https://media.istockphoto.com/photos/headshot-portrait-of-smiling-male-employee-in-office-picture-id1309328823?b=1&k=20&m=1309328823&s=170667a&w=0&h=a-f8vR5TDFnkMY5poQXfQhDSnK1iImIfgVTVpFZi_KU=",
+      "assetName": "stream-bread.mp4-74206f1d-97ee-406b-af3d-d28f705e2ea2-output",
+      "locatorName": "locator-74206f1d-97ee-406b-af3d-d28f705e2ea2",
+      "streamingPath": "/3c1f8a45-46d1-4cb4-85fe-398f5914da85/bread.ism/manifest",
+      "ampTestUrl": "http://ampdemo.azureedge.net/?url=https://quickvid-aaea.streaming.media.azure.net/3c1f8a45-46d1-4cb4-85fe-398f5914da85/bread.ism/manifest"
+    },
+    {
+      "id": 3,
+      "username": "bubbly_snowflake",
+      "userImg": "https://i0.wp.com/www.badchix.com/wp-content/uploads/2019/08/seen-on-badchix-weekend-links-roundup-01.jpg?resize=481%2C321&ssl=1",
+      "assetName": "stream-surprise.mp4-78ad5591-2ea8-45fc-9b35-582b388514c7-output",
+      "locatorName": "locator-78ad5591-2ea8-45fc-9b35-582b388514c7",
+      "streamingPath": "/1fd06993-2a22-4a1e-a163-cf3c22ab5020/surprise.ism/manifest",
+      "ampTestUrl": "http://ampdemo.azureedge.net/?url=https://quickvid-aaea.streaming.media.azure.net/1fd06993-2a22-4a1e-a163-cf3c22ab5020/surprise.ism/manifest"
+    },
+    {
+      "id": 4,
+      "username": "angelic.princess.kristy",
+      "userImg": "https://c4.wallpaperflare.com/wallpaper/820/957/316/lidia-savoderova-model-face-profile-wallpaper-preview.jpg",
+      "assetName": "stream-surprise.mp4-7d4b5a39-baa5-4ebf-a232-8c207e70b93f-output",
+      "locatorName": "locator-7d4b5a39-baa5-4ebf-a232-8c207e70b93f",
+      "streamingPath": "/3e849e8d-7716-4f39-8480-688fe0df6789/surprise.ism/manifest",
+      "ampTestUrl": "http://ampdemo.azureedge.net/?url=https://quickvid-aaea.streaming.media.azure.net/3e849e8d-7716-4f39-8480-688fe0df6789/surprise.ism/manifest"
+    },
+    {
+      "id": 5,
+      "username": "fairy.princess.kristy",
+      "userImg": "https://media.istockphoto.com/photos/headshot-portrait-of-smiling-ethnic-businessman-in-office-picture-id1300512215?b=1&k=20&m=1300512215&s=612x612&w=0&h=pP5ksvhx-gIHFVAyZTn31H_oJuhB0nX4HnLLUN2kVAg=",
+      "assetName": "stream-ForBiggerBlaze.mp4-c568c429-2bad-48dc-9df3-9aad0b405018-output",
+      "locatorName": "locator-c568c429-2bad-48dc-9df3-9aad0b405018",
+      "streamingPath": "/07c6d513-0914-423d-b77d-ec917c10908f/ForBiggerBlaze.ism/manifest",
+      "ampTestUrl": "http://ampdemo.azureedge.net/?url=https://quickvid-aaea.streaming.media.azure.net/07c6d513-0914-423d-b77d-ec917c10908f/ForBiggerBlaze.ism/manifest"
+    },
+    {
+      "id": 6,
+      "username": "baby_kristy_butterfly",
+      "userImg": "https://learn.microsoft.com/answers/storage/attachments/209536-360-f-364211147-1qglvxv1tcq0ohz3fawufrtonzz8nq3e.jpg",
+      "assetName": "stream-Azure_Bumper.mp4-eae65a25-6f46-4e2d-b61a-6f3dcf130dde-output",
+      "locatorName": "locator-eae65a25-6f46-4e2d-b61a-6f3dcf130dde",
+      "streamingPath": "/5b1a812e-cf2a-44ac-bfdf-38c9c2dbb3f2/Azure_Bumper.ism/manifest",
+      "ampTestUrl": "http://ampdemo.azureedge.net/?url=https://quickvid-aaea.streaming.media.azure.net/5b1a812e-cf2a-44ac-bfdf-38c9c2dbb3f2/Azure_Bumper.ism/manifest"
+    }
+  ]
+}
