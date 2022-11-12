@@ -32,7 +32,8 @@ module.exports = async function (req,res) {
                     username: req.body.username, 
                     email: req.body.email, 
                     password: req.body.password,
-                    created: timestampString
+                    created: timestampString,
+                    userLevel: "user"
                 };
                 const query = { username: user.username};
                 const update = { $set: user };
