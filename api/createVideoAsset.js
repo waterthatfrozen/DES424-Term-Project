@@ -9,12 +9,14 @@ const url = require("whatwg-url");
 const util = require("util");
 const fs = require("fs");
 const multipart = require("parse-multipart");
+const { MongoClient, ObjectId } = require('mongodb');
 require("dotenv").config();
 
 const subscriptionId = process.env.AZURE_SUBSCRIPTION_ID;
 const resourceGroup = process.env.AZURE_RESOURCE_GROUP;
 const accountName = process.env.AZURE_MEDIA_SERVICES_ACCOUNT_NAME;
 const azureStorageConnectionString = process.env.AZURE_STORAGE_CONNECTION_STRING;
+const AZURE_COSMOSDB_CONNECTION_STRING = process.env["AZURE_COSMOSDB_CONNECTION_STRING"];
 const credential = new DefaultAzureCredential();
 const timeoutSeconds = 60 * 10;
 const sleepInterval = 1000 * 2;
@@ -44,7 +46,7 @@ async function createInputAsset(assetName, fileToUpload){
         console.log('Uploading file named '+fileName+' to blob in the asset container');
         let containerClient = blobClient.getContainerClient('');
         let blockBlobClient = containerClient.getBlockBlobClient(fileName);
-        await blockBlobClient.uploadData(fileToUpload.data, {
+        await blockBlobClient.uploadData(fileToUpload, {
             abortSignal: AbortController.timeout(30 * 60 * 1000),
             blobHTTPHeaders: { blobContentType: fileType },
             blockSize: 4 * 1024 * 1024,
@@ -130,7 +132,7 @@ async function downloadResults(assetName, resultsFolder){
             await blockBlobClient.downloadToFile(path.join(directory, blob.name), 0, undefined, {
                 abortSignal: AbortController.timeout(30 * 60 * 1000),
                 maxRetryRequests: 2,
-                onProgress: (ev) => {console.log(ev)}
+                // onProgress: (ev) => {console.log(ev)}
             }).then(() => {
                 console.log(`Download file complete`);
             });
@@ -158,18 +160,38 @@ async function waitForJobToFinish(transformName, jobName) {
   return pollForJobStatus();
 }
 
+async function insertVideoRecord(userID, videoDescription, assetName, locatorName, streamingPath){
+    const client = new MongoClient(AZURE_COSMOSDB_CONNECTION_STRING);
+    await client.connect();
+    let db = await client.db(`qikvid-db`);
+    let collection = await db.collection(`videos`);
+    let video = {
+        userID: userID,
+        timestamp: new Date().toISOString(),
+        videoDescription: videoDescription,
+        assetName: assetName,
+        locatorName: locatorName,
+        streamingPath: streamingPath,
+        likedBy: [],
+    };
+    let result = await collection.insertOne(video);
+    await client.close();
+    return result;
+}
+
 module.exports = async function (req, res) {
+    console.log("Request: " + req.method + " " + req.url);
+    console.log("Request body: " + JSON.stringify(req.body));
+    console.log("Request files: " + req.file.originalname);
     if(req.body){
         try{
+            if (!AZURE_COSMOSDB_CONNECTION_STRING) {throw Error("Azure Cosmos DB Connection string not found");}
             console.log('JavaScript HTTP trigger function processed a request.');
-            const bodyBuffer = Buffer.from(req.body);
-            console.log(req.body);
-            const boundary = multipart.getBoundary(req.headers["content-type"]);
-            const parts = multipart.Parse(bodyBuffer, boundary);
-            inputFile = parts[0];
-            fileName = inputFile.filename;
-            fileType = inputFile.type;
-            console.log(inputFile);
+            const bodyBuffer = Buffer.from(req.file.buffer);
+            inputFile = bodyBuffer;
+            fileType = req.file.mimetype.split("/")[1];
+            fileName = req.file.originalname;
+            console.log(fileType, fileName);
 
             const encodingTransformName = "ContentAwareEncoding";
             console.log("Creating encoding transform...");
@@ -192,14 +214,13 @@ module.exports = async function (req, res) {
                 let job = await submitJob(encodingTransformName, jobName, input, outputAsset.name);
                 console.log(`Waiting for Job - ${job.name} - to finish encoding`);
                 job = await waitForJobToFinish(encodingTransformName, jobName);
-                if (job.state == "Finished") {
-                    await downloadResults(outputAsset.name, outputFolder);
-                }
+                if (job.state == "Finished") { await downloadResults(outputAsset.name, outputFolder); }
                 let locator = await createStreamingLocator(outputAsset.name, locatorName);
                 let urls;
                 if (locator.name !== undefined) {
                     urls = await getStreamingUrls(locator.name);
                 } else {throw new Error("Locator was not created or Locator.name is undefined")};
+                let videoRecord = await insertVideoRecord(req.body.userID, req.body.videoDescription, outputAsset.name, locator.name, urls);
                 res.status(200).send({message: "Video asset is uploaded successfully", mainfestPath: urls});
             }
         }catch(err){
