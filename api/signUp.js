@@ -27,10 +27,7 @@ module.exports = async function (req,res) {
             else {
                 // Create new doc and upsert (create or replace) to collection
                 let today = new Date();
-                let timestampString = today.toISOString().split("T")[0];
-                // let dd = String(today.getDate()).padStart(2, '0');
-                // let mm = String(today.getMonth() + 1).padStart(2, '0');
-                // let yyyy = today.getFullYear();
+                let timestampString = today.toISOString();
                 const user = { 
                     username: req.body.username, 
                     email: req.body.email, 
@@ -44,9 +41,6 @@ module.exports = async function (req,res) {
                 try{
                     const upsertResult1 = await collection.updateOne(query, update, options);
                     console.log("Signing up new user");
-                    // const insertResult = await collection.insertOne(user);
-                    // const userID = await insertResult.insertedId;
-                    // console.log("New user ID: ", userID);
                     res.status(200).send({message: "Sign up new user successfully", timestamp: timestampString});
                 }catch(error){
                     res.status(500).send({message: "Error while signing up", error: error});
