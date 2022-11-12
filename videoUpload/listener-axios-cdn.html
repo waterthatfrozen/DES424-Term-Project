@@ -30,7 +30,7 @@
       alert("Please select a video file");
       return;
     }else{
-    axios.post('https://quickvidapp.azurewebsites.net/api/videoUpload', formData)
+    axios.post('https://api-quickvid.azurewebsites.net/videoUpload', formData)
       .then(res => {console.log(res); alert("Video Uploaded Successfully")})
       .catch(err => {console.log(err); alert("Video Upload Failed")});
     }

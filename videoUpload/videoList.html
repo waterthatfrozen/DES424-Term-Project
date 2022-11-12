@@ -17,7 +17,7 @@
 
 <script>
     const videoList = document.querySelector("#videoList");
-    axios.get('https://quickvidapp.azurewebsites.net/api/listStreamingPath').then(res => {
+    axios.get('https://api-quickvid.azurewebsites.net/listStreamingPath').then(res => {
             console.log(res.data);
             let allPaths = res.data.streamingPaths;
             document.getElementById("loading").remove();

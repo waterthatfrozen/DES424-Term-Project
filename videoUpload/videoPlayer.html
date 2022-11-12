@@ -56,7 +56,7 @@
     deleteLink.addEventListener("click", function(){
         console.log("delete");
         console.log(locatorName, assetName);
-        axios.delete('https://quickvidapp.azurewebsites.net/api/deleteVideoAsset?assetName='+assetName+'&locatorName='+locatorName).then(res => {
+        axios.delete('https://api-quickvid.azurewebsites.net/deleteVideoAsset?assetName='+assetName+'&locatorName='+locatorName).then(res => {
             console.log(res.data);
             alert("Video deleted successfully!");
             window.location.href = "/listVideo";

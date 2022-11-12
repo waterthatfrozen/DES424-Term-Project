@@ -111,3 +111,5 @@ client/401.html
 client/404.html
 client/500.html
 client/index.html
+api/Temp/*
+api/upload/*
