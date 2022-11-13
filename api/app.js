@@ -41,6 +41,7 @@ app.post('/videoUpload', (req, res) => { require('./videoUpload')(req, res); });
 const createVideoAsset = require('./createVideoAsset');
 //multer({storage: multer.memoryStorage()}).single('file')
 app.post('/createVideoAsset', multer({storage: multer.memoryStorage()}).single('file'), (req, res) => { console.log(req); createVideoAsset(req, res); });
+app.post('/likeVideo', (req, res) => { require('./likeVideo')(req, res); });
 
 app.delete('/deleteVideoAsset', (req,res) => { require('./deleteVideoAsset')(req,res); });
 
