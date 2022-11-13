@@ -38,6 +38,7 @@ app.get('/fetchVideo', (req, res) => { require('./fetchVideo')(req, res); });
 
 app.post('/login', (req, res) => { require('./login')(req, res); });
 app.post('/signUp', (req, res) => { require('./signUp')(req, res); });
+app.post('/deactivateUser', (req, res) => { require('./deactivateUser')(req, res); });
 app.post('/videoUpload', (req, res) => { require('./videoUpload')(req, res); });
 
 const createVideoAsset = require('./createVideoAsset');

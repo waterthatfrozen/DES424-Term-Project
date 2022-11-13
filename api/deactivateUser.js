@@ -6,7 +6,7 @@ client.connect();
 
 module.exports = async function (req,res) {
     if (!AZURE_COSMOSDB_CONNECTION_STRING) {throw Error("Azure Cosmos DB Connection string not found.");}
-    if (req.body.username !== "" && req.body.password !== "") {
+    if (req.body.username !== "") {
         // Get reference of database and collection
         let db = await client.db(`qikvid-db`);
         let collection = await db.collection('users');
@@ -17,17 +17,17 @@ module.exports = async function (req,res) {
             res.status(400).send({message: "This user doesn't exist"});
         }
         else if (!foundUsername.activated) {
-            res.status(400).send({message: "This user is disabled."});
+            res.status(400).send({message: "This user is already disabled."});
         }
-        else{
-            if(foundUsername.password == req.body.password){
-                // Login
-                res.status(200).send({message: "Login was successfull.", userID: foundUsername._id, userLevel: foundUsername.userLevel});
-            } else {
-                res.status(400).send({message: "Username and password don't match."});
-            }
+        else {
+            await collection.updateOne(
+                { username: req.body.username },
+                { $set: { 'activated': false } }
+            )
+            res.status(200).send({message: "The user " + req.body.username + " got disabled."});
         }
-    } else {
-        res.status(400).send({message: "Username and/or password are missing."});
+    }
+    else {
+        res.status(400).send({message: "Username is missing."});
     }
 }
