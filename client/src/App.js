@@ -8,6 +8,7 @@ import SignupPage from "./SignupPage";
 import UserPage from "./UserPage";
 import UploadPage from "./UploadPage";
 import AdminUserManage from "./AdminUserManage";
+import AdminVideoManage from "./AdminVideoManage";
 
 /*
 You may need an appropriate loader to handle this file type.
@@ -40,6 +41,7 @@ function App() {
           ></Route>
           <Route path="/signup" element={<SignupPage />}></Route>
           <Route path="/admin-user" element={<AdminUserManage />}></Route>
+          <Route path="/admin-video" element={<AdminVideoManage />}></Route>
         </Routes>
       </div>
     </Router>
