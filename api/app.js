@@ -40,6 +40,7 @@ app.get('/fetchAllUsers', (req, res) => { require('./fetchAllUsers')(req, res); 
 app.post('/login', (req, res) => { require('./login')(req, res); });
 app.post('/signUp', (req, res) => { require('./signUp')(req, res); });
 app.post('/deactivateUser', (req, res) => { require('./deactivateUser')(req, res); });
+app.post('/activateUser', (req, res) => { require('./activateUser')(req, res); });
 app.post('/videoUpload', (req, res) => { require('./videoUpload')(req, res); });
 
 const createVideoAsset = require('./createVideoAsset');
