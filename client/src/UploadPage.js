@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import axios from "axios";
+// import express from "express"
 
 export default function UploadPage() {
   const navigateTo = useNavigate();
@@ -11,9 +12,10 @@ export default function UploadPage() {
   };
   const [formData, setFormData] = React.useState({
     userID: userInfo.userID,
-    file: "",
     videoDescription: "",
   });
+  const [file, setFile] = React.useState({});
+  // const app = express();
 
   React.useEffect(() => {
     if (
@@ -29,31 +31,27 @@ export default function UploadPage() {
     let form = document.querySelector("form");
     const { name, value } = event.target;
     let data = new FormData(form);
-    // console.log(...data);
-    console.log(data.get("file"));
-    // console.log(value);
-    if (value.length < 300) {
+    if (value.length < 300 && name !== "file") {
       setFormData((prevFormData) => ({
         ...prevFormData,
         [name]: value,
       }));
+    } else if (name === "file") {
+      setFile(data.get("file"));
     }
-    console.log(data);
   }
 
   async function handleSubmit(event) {
     event.preventDefault();
-
+    // console.log(file);
+    const sendForm = { ...formData, file };
     if (formData.file === "") {
       alert("Please insert video file");
     } else {
-      // pass อะไรไปบ้าง
       await axios
-        .post(
-          "https://api-quickvid.azurewebsites.net/createVideoAsset",
-          formData,
-          { headers: { "Content-type": "multipart/form-data" } }
-        )
+        .post("http://localhost:5000/createVideoAsset", sendForm, {
+          headers: { "Content-type": "multipart/form-data" },
+        })
         .then((res) => {
           console.log(res);
           alert("Video Uploaded Successfully");

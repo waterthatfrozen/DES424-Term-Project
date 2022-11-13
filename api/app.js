@@ -22,8 +22,8 @@ const corsOptions ={
 
 app.use(cors(corsOptions));
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({limit: '100mb'}));
+app.use(express.urlencoded({ limit: '100mb', extended: true, parameterLimit: 50000 }));
 
 // set the static files
 app.use(express.static(PATH));
@@ -41,7 +41,7 @@ app.post('/videoUpload', (req, res) => { require('./videoUpload')(req, res); });
 
 const createVideoAsset = require('./createVideoAsset');
 //multer({storage: multer.memoryStorage()}).single('file')
-app.post('/createVideoAsset', multer({storage: multer.memoryStorage()}).single('file'), (req, res) => { console.log(req); createVideoAsset(req, res); });
+app.post('/createVideoAsset', multer({storage: multer.memoryStorage()}).single('file'), (req, res) => { console.log("REQUEST RECEIVED!"); createVideoAsset(req, res); });
 app.post('/likeVideo', (req, res) => { require('./likeVideo')(req, res); });
 
 app.delete('/deleteVideoAsset', (req,res) => { require('./deleteVideoAsset')(req,res); });
