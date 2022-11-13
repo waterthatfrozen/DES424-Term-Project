@@ -113,3 +113,4 @@ client/500.html
 client/index.html
 api/Temp/*
 api/upload/*
+react-nginx-docker

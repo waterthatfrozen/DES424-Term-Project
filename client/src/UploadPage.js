@@ -49,9 +49,13 @@ export default function UploadPage() {
       alert("Please insert video file");
     } else {
       await axios
-        .post("https://api-quickvid.azurewebsites.net/createVideoAsset", sendForm, {
-          headers: { "Content-Type": "multipart/form-data" },
-        })
+        .post(
+          "https://api-quickvid.azurewebsites.net/createVideoAsset",
+          sendForm,
+          {
+            headers: { "Content-Type": "multipart/form-data" },
+          }
+        )
         .then((res) => {
           console.log(res);
           alert("Video Uploaded Successfully");
@@ -96,7 +100,9 @@ export default function UploadPage() {
             onChange={handleChange}
             value={formData.videoDescription}
           ></textarea>
-          <p className="text-center mb-5">{formData.videoDescription.length}/300</p>
+          <p className="text-center mb-5">
+            {formData.videoDescription.length}/300
+          </p>
         </div>
 
         <button className=" self-center w-80 md:w-1/2  h-12 mb-4 rounded-xl text-xl text-white bg-sky-400 hover:bg-sky-500">
