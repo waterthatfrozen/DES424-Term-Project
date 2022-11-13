@@ -1,12 +1,12 @@
 import React from "react";
-// import userImg from "../assets/user-img.jpeg";
 import heart from "../assets/heart.png";
 import heartFill from "../assets/heart-fill.png";
-// import chat from "../assets/chat.png";
+import bin from "../assets/bin.png";
 
 export default function VideoContainer(props) {
   const [likeCount, setLikeCount] = React.useState(0);
   const [likeVideo, setLikeVideo] = React.useState(false);
+  const showBin = props.showBin;
 
   React.useEffect(() => {
     let infoUser = props.info;
@@ -17,13 +17,26 @@ export default function VideoContainer(props) {
     <div>
       <div className="flex justify-center items-center">
         <div className="flex flex-col  md:w-1/2 p-10  bg-white/20">
-          <div className="flex items-center mb-5">
-            <img
-              src={props.userImg}
-              alt="user_img"
-              className="self-center w-16 h-16 object-cover rounded-full"
-            />
-            <h2 className="ml-5 text-xl text-gray-800">{props.userName}</h2>
+          <div className="flex items-center justify-between mb-5">
+            <div className="flex items-center">
+              <div className={`w-16 h-16 rounded-full bg-slate-200`}>
+                <p className="flex items-center justify-center h-full text-5xl font-bold text-neutral-800 ">
+                  {props.userName[0].toUpperCase()}
+                </p>
+              </div>
+              <h2 className="w-40 lg:w-72 ml-5 text-xl text-gray-800 overflow-hidden text-ellipsis">
+                {props.userName}mmmmmmmmmmmmmmmmpppppppppppppppp
+              </h2>
+            </div>
+
+            {showBin && (
+              <img
+                src={bin}
+                alt="bin"
+                className="w-8 h-8 cursor-pointer"
+                onClick={() => console.log("click delete")}
+              />
+            )}
           </div>
 
           <iframe

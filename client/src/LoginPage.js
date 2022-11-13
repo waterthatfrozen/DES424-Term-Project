@@ -1,15 +1,16 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import logo from "./assets/logo.png";
+import md5 from "md5";
 // https://reactrouter.com/en/main/hooks/use-navigation#navigationlocation tell when the form is submit where is the next location
 
-export default function LoginPage() {
+export default function LoginPage(props) {
+  const navigateTo = useNavigate();
   const [formdata, setFormData] = React.useState({
     username: "",
     password: "",
   });
-
-  const navigateTo = useNavigate();
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -17,18 +18,30 @@ export default function LoginPage() {
       ...prevFormData,
       [name]: value,
     }));
-    // console.log(formdata)
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-    // check username and password in database
-    console.log("Successfully login!");
-    console.log(formdata);
-  }
-
-  function forgetPassword() {
-    alert("Please email to 6222782425@g.siit.tu.ac.th");
+    try {
+      await axios
+        .post("https://api-quickvid.azurewebsites.net/login", {
+          username: formdata.username,
+          password: md5(formdata.password),
+        })
+        .then((response) => {
+          if (response.data.userLevel === "admin") {
+            navigateTo("/admin-user");
+          } else {
+            props.userInfo({
+              username: formdata.username,
+              userID: response.data.userID,
+            });
+            navigateTo("/");
+          }
+        });
+    } catch (error) {
+      alert(error.response.data.message);
+    }
   }
 
   return (
@@ -40,8 +53,6 @@ export default function LoginPage() {
           className="justify-center w-1/3 md:w-1/5 mt-8"
         />
         <h1 className="mt-8 mb-4 text-4xl font-medium text-sky-500">Log In</h1>
-
-        {/* method POST */}
         <form onSubmit={handleSubmit} className="w-full md:w-3/4">
           <div className="flex flex-col my-4">
             <h4 className="text-xl text-sky-500">Username</h4>
@@ -65,26 +76,28 @@ export default function LoginPage() {
               onChange={handleChange}
               value={formdata.password}
             />
-            <a
-              onClick={forgetPassword}
+            <p
+              onClick={() =>
+                alert("Please email to 6222782425@g.siit.tu.ac.th")
+              }
               className="self-end mb-8 text-sky-700 cursor-pointer"
             >
               Forget a password?
-            </a>
+            </p>
           </div>
 
           <button className="w-full h-9 mb-4 rounded-xl text-xl text-white bg-sky-400 hover:bg-sky-500">
             Sign In
           </button>
         </form>
-        <span className="mb-8 text-sky-700">
+        <span className="flex mb-8 text-sky-700">
           Doesn't have an account? &nbsp;
-          <a
+          <p
             className="underline text-sky-700 cursor-pointer"
             onClick={() => navigateTo("/signup")}
           >
             Sign Up
-          </a>
+          </p>
         </span>
       </div>
     </div>

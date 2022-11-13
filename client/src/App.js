@@ -7,6 +7,7 @@ import LoginPage from "./LoginPage";
 import SignupPage from "./SignupPage";
 import UserPage from "./UserPage";
 import UploadPage from "./UploadPage";
+import AdminUserManage from "./AdminUserManage";
 
 /*
 You may need an appropriate loader to handle this file type.
@@ -15,6 +16,17 @@ SyntaxError: Unexpected token (1105:8)
 */
 
 function App() {
+  const [userInfo, setUserInfo] = React.useState([]);
+
+  React.useEffect(() => {
+    if (userInfo) {
+      sessionStorage.setItem("user-name", userInfo.username);
+      sessionStorage.setItem("user-id", userInfo.userID);
+    }
+
+    // console.log(sessionStorage.getItem("user-id"));
+  }, [userInfo]);
+
   return (
     <Router>
       <div className="App">
@@ -22,8 +34,12 @@ function App() {
           <Route path="/" element={<HomePage />}></Route>
           <Route path="/user" element={<UserPage />}></Route>
           <Route path="/upload" element={<UploadPage />}></Route>
-          <Route path="/login" element={<LoginPage />}></Route>
+          <Route
+            path="/login"
+            element={<LoginPage userInfo={(data) => setUserInfo(data)} />}
+          ></Route>
           <Route path="/signup" element={<SignupPage />}></Route>
+          <Route path="/admin-user" element={<AdminUserManage />}></Route>
         </Routes>
       </div>
     </Router>
