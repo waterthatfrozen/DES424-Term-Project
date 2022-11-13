@@ -33,7 +33,7 @@
     }else{
       console.log(...formData);
       document.getElementById("status").innerText = "Uploading...";
-      axios.post('http://localhost:5000/createVideoAsset', formData, {
+      axios.post('https://api-quickvid.azurewebsites.net/createVideoAsset', formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       }).then(res => {
           console.log(res);

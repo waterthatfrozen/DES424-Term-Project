@@ -33,6 +33,7 @@ http.createServer(app).listen(PORT, () => {
 
 app.get('/', (req, res) => { require('./helloWorld')(req, res); });
 app.get('/listStreamingPath', (req, res) => { require('./listStreamingPath')(req, res); });
+app.get('/listUserVideo', (req, res) => { require('./listUserVideo')(req, res); });
 
 app.post('/login', (req, res) => { require('./login')(req, res); });
 app.post('/signUp', (req, res) => { require('./signUp')(req, res); });
