@@ -180,6 +180,7 @@ async function insertVideoRecord(userID, videoDescription, assetName, locatorNam
 }
 
 module.exports = async function (req, res) {
+    console.log("Video Asset Upload Called");
     console.log("Request: " + req.method + " " + req.url);
     console.log("Request body: " + JSON.stringify(req.body));
     console.log("Request files: " + req.file.originalname);
