@@ -14,5 +14,10 @@ module.exports = async function (req,res) {
     // Get one random video
     let allVideos = await collection.find({}).toArray();
     let video = allVideos[Math.floor(Math.random()*allVideos.length)];
+    
+    // Change userID to username
+    const foundUser = await db.collection('users').findOne({ _id: ObjectId(video.userID) });
+    video.username = foundUser.username;
+    
     res.status(200).send(video);
 }
