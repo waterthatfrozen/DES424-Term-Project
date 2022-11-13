@@ -29,13 +29,13 @@ export default function LoginPage(props) {
           password: md5(formdata.password),
         })
         .then((response) => {
+          props.userInfo({
+            username: formdata.username,
+            userID: response.data.userID,
+          });
           if (response.data.userLevel === "admin") {
             navigateTo("/admin-user");
           } else {
-            props.userInfo({
-              username: formdata.username,
-              userID: response.data.userID,
-            });
             navigateTo("/");
           }
         });
@@ -46,13 +46,13 @@ export default function LoginPage(props) {
 
   return (
     <div className="flex justify-center items-center h-screen bg-gradient-to-r from-[#80d1e6] to-[#c7ecf7]">
-      <div className="flex flex-col items-center w-5/6 md:w-1/3 p-5 rounded-lg bg-white">
+      <div className="flex flex-col items-center w-5/6 md:w-1/3 p-3 rounded-lg bg-white">
         <img
           src={logo}
           alt="logo"
           className="justify-center w-1/3 md:w-1/5 mt-8"
         />
-        <h1 className="mt-8 mb-4 text-4xl font-medium text-sky-500">Log In</h1>
+        <h1 className="mt-8 mb-4 text-3xl font-medium text-sky-500">Log In</h1>
         <form onSubmit={handleSubmit} className="w-full md:w-3/4">
           <div className="flex flex-col my-4">
             <h4 className="text-xl text-sky-500">Username</h4>

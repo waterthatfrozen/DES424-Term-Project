@@ -31,7 +31,7 @@ export default function UploadPage() {
     let form = document.querySelector("form");
     const { name, value } = event.target;
     let data = new FormData(form);
-    if (value.length < 300 && name !== "file") {
+    if (value.length <= 300 && name !== "file") {
       setFormData((prevFormData) => ({
         ...prevFormData,
         [name]: value,
@@ -43,14 +43,14 @@ export default function UploadPage() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    // console.log(file);
+    // console.log(formData);
     const sendForm = { ...formData, file };
     if (formData.file === "") {
       alert("Please insert video file");
     } else {
       await axios
-        .post("http://localhost:5000/createVideoAsset", sendForm, {
-          headers: { "Content-type": "multipart/form-data" },
+        .post("https://api-quickvid.azurewebsites.net/createVideoAsset", sendForm, {
+          headers: { "Content-Type": "multipart/form-data" },
         })
         .then((res) => {
           console.log(res);
@@ -88,14 +88,16 @@ export default function UploadPage() {
           />
         </div>
 
-        <input
-          className="self-center w-80 md:w-1/2  h-16  pl-2 mb-5 rounded-xl"
-          placeholder="Write caption here ..."
-          type="text"
-          name="videoDescription"
-          onChange={handleChange}
-          value={formData.videoDescription}
-        />
+        <div className="self-center w-80 md:w-1/2">
+          <textarea
+            className="w-full h-40  p-4 rounded-xl"
+            placeholder="Write description here ..."
+            name="videoDescription"
+            onChange={handleChange}
+            value={formData.videoDescription}
+          ></textarea>
+          <p className="text-center mb-5">{formData.videoDescription.length}/300</p>
+        </div>
 
         <button className=" self-center w-80 md:w-1/2  h-12 mb-4 rounded-xl text-xl text-white bg-sky-400 hover:bg-sky-500">
           Submit

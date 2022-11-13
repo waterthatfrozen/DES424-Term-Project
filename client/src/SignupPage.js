@@ -76,13 +76,13 @@ export default function SignupPage() {
 
   return (
     <div className="flex justify-center items-center h-screen bg-gradient-to-r from-[#80d1e6] to-[#c7ecf7]">
-      <div className="flex flex-col items-center w-5/6 md:w-1/3 p-5 rounded-lg bg-white">
+      <div className="flex flex-col items-center w-5/6 md:w-1/3  p-3 rounded-lg bg-white">
         <img
           src={logo}
           alt="logo"
-          className="justify-center w-1/3 md:w-1/5 mt-8"
+          className="justify-center w-1/3 md:w-1/5 mt-8 md:mt-3"
         />
-        <h1 className="mt-8 mb-4 text-4xl font-medium text-sky-500 ">
+        <h1 className="mt-8 mb-4 text-3xl font-medium text-sky-500 ">
           Sign Up
         </h1>
         {/* method POST */}
@@ -162,7 +162,7 @@ export default function SignupPage() {
             Sign Up
           </button>
         </form>
-        <span className="flex mb-8 text-sky-700 ">
+        <span className="flex text-sky-700 ">
           Already have an account? &nbsp;
           <p
             className="underline text-sky-700 cursor-pointer"

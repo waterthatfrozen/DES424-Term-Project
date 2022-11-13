@@ -32,7 +32,9 @@ export default function Navbar(props) {
   return (
     <div className="flex justify-between sticky w-full h-[90px] top-0 p-3 pl-10 pr-10 z-10 bg-white">
       <div className="flex justify-center">
-        <img src={logo} alt="logo" className="self-center w-[50px] h-[50px]" />
+        <img src={logo} alt="logo" onClick={() => {
+            changePage("home");
+          }} className="self-center w-[50px] h-[50px] cursor-pointer" />
       </div>
       <div className="grid grid-cols-3 gap-8">
         <img
