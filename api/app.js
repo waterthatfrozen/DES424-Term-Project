@@ -5,15 +5,25 @@ const http = require('http'),
     axios = require('axios'),
     dotenv = require('dotenv'),
     path = require('path'),
+    cors = require('cors'),
+    multer = require('multer'),
     app = express();
 dotenv.config();
 
 const PATH = __dirname;
 const PORT = process.env.PORT || 5000;
 
-// Express configuration
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+const corsOptions ={
+    origin:'*', 
+    credentials: true,
+    optionSuccessStatus: 200,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+};
+
+app.use(cors(corsOptions));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // set the static files
 app.use(express.static(PATH));
@@ -23,11 +33,16 @@ http.createServer(app).listen(PORT, () => {
 
 app.get('/', (req, res) => { require('./helloWorld')(req, res); });
 app.get('/listStreamingPath', (req, res) => { require('./listStreamingPath')(req, res); });
+app.get('/listUserVideo', (req, res) => { require('./listUserVideo')(req, res); });
 
 app.post('/login', (req, res) => { require('./login')(req, res); });
 app.post('/signUp', (req, res) => { require('./signUp')(req, res); });
 app.post('/videoUpload', (req, res) => { require('./videoUpload')(req, res); });
-app.post('/createVideoAsset', (req,res) => { require('./createVideoAsset')(req,res); });
+
+const createVideoAsset = require('./createVideoAsset');
+//multer({storage: multer.memoryStorage()}).single('file')
+app.post('/createVideoAsset', multer({storage: multer.memoryStorage()}).single('file'), (req, res) => { console.log(req); createVideoAsset(req, res); });
+app.post('/likeVideo', (req, res) => { require('./likeVideo')(req, res); });
 
 app.delete('/deleteVideoAsset', (req,res) => { require('./deleteVideoAsset')(req,res); });
 

@@ -19,14 +19,12 @@ module.exports = async function (req,res) {
         else{
             if(foundUsername.password == req.body.password){
                 // Login
-                res.status(200).send({message: "Login successfully", userID: foundUsername._id});
-            }
-            else {
-                context.res = { status: 400, body: {message: "Username and password don't match."}};
+                res.status(200).send({message: "Login successfully", userID: foundUsername._id, userLevel: foundUsername.userLevel});
+            } else {
+                res.status(400).send({message: "Username and password don't match."});
             }
         }
-    }
-    else {
-        context.res = { status: 400, body: "Please input username and password." };
+    } else {
+        res.status(400).send({message: "Please input username and password."});
     }
 }

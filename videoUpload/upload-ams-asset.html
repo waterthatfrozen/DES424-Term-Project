@@ -11,8 +11,9 @@
 <body>
     <a href="/demoLanding">Back</a>
     <h1>Upload to Azure Media Service Asset</h1>
-    <form id="form">
+    <form id="form" enctype="multipart/form-data">
         <input type="file" name="file" accept="video/*">
+        <input type="hidden" name="userID" value="636f5c3ce56a10d15a501a5e">
         <button type="submit">Submit</button>
     </form>
     <p>Status: <br/><span id="status">---</span></p>
@@ -21,25 +22,27 @@
 <script>
   const form = document.querySelector("form");
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const formData = new FormData(form);
-    document.getElementById("status").innerText = "Uploading...";
-    console.log([...formData]);
     let pattern = /video\/.*/;
     let file = formData.get('file');
     if (!file.type.match(pattern)){
       alert("Please select a video file");
       return;
     }else{
-    axios.post('https://quickvidapp.azurewebsites.net/api/createVideoAsset', formData)
-      .then(res => {
-        console.log(res);
-        alert("Video Uploaded Successfully"); 
-        document.getElementById("status").innerText = "Uploaded";
-        document.getElementById("response").innerText = JSON.stringify(res.data, null, 2);
-      }).catch(err => {console.log(err); alert("Video Upload Failed")});
-    }
+      console.log(...formData);
+      document.getElementById("status").innerText = "Uploading...";
+      axios.post('https://api-quickvid.azurewebsites.net/createVideoAsset', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      }).then(res => {
+          console.log(res);
+          alert("Video Uploaded Successfully"); 
+          document.getElementById("status").innerText = "Uploaded";
+          document.getElementById("response").innerText = JSON.stringify(res.data, null, 2);
+        }).catch(err => {console.log(err); alert("Video Upload Failed")});
+      }
+
   });
 </script>
 </html>

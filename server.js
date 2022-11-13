@@ -8,63 +8,24 @@ const http = require('http'),
     axios = require('axios'),
     dotenv = require('dotenv'),
     path = require('path'),
+    cors = require('cors'),
     app = express();
 
 const PATH = __dirname;
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5500;
 
-// check for session is expired or not
-function checkTokenValid(req, res, next) {
-    if (req.session.token) {
-        let now = new Date().getTime();
-        let expires = new Date(req.session.token._expires).getTime();
-        if (expires > now) {
-            next();
-        }else{
-            req.session = null;
-            res.status(401).redirect('/401');
-        }
-    }else{
-        res.status(401).redirect('/401');
-    }
-}
+const corsOptions ={
+    origin:'*',
+    credentials: true,
+    optionSuccessStatus: 200,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+};
+
+app.use(cors(corsOptions));
 
 // Express configuration
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());
-
-// session settings
-app.use(session({
-    secret: 'secret',
-    resave: false,
-    saveUninitialized: true,
-    cookie: {maxAge: 60000}
-}));
-
-// remove the session cookie on the server when it expires
-app.use((req, _res, next) => {
-    if(req.session.token){
-        let now = new Date().getTime();
-        let tokenExpiry = new Date(req.session.cookie._expires).getTime();
-        if (now > tokenExpiry) { req.session = null; }
-    }
-    next();
-});
-
-// remove the back button from the browser
-app.use((_req, res, next) =>{
-    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-    res.setHeader('Pragma', 'no-cache');
-    res.setHeader('Expires', 0);
-    next();
-});
-
-// prevent browser for calling static files
-app.use((req, res, next) => {
-    if (req.url.indexOf('.html') > -1) { res.status(404).redirect('/404'); }
-    else { next(); }
-});
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // set the static files
 app.use(express.static(PATH));
@@ -79,11 +40,6 @@ app.get('/uploadDemo', (req, res) => { res.sendFile(path.join(PATH, '/videoUploa
 app.get('/uploadAssetDemo', (req,res) => {res.sendFile(path.join(PATH, '/videoUpload/upload-ams-asset.html')); });
 app.get('/listVideo', (req,res) => {res.sendFile(path.join(PATH, '/videoUpload/videoList.html')); });
 app.get('/videoPlayer', (req,res) => {res.sendFile(path.join(PATH,'/videoUpload/videoPlayer.html')); })
-
-// api routes
-const playground = require('./api/helloWorld');
-app.get('/api/hello', playground.helloWorld);
-app.get('/api/testBackend', (req, res) => { res.send({message: 'Express is connected!'}); });
 
 // Error Code Route
 app.get('/401', (req, res) => { res.send({error: 'Unauthorized'}); });
