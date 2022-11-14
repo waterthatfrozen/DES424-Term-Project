@@ -1,40 +1,64 @@
 import axios from "axios";
 import React from "react";
 import Navbar from "./components/Navbar";
+import { useNavigate } from "react-router-dom";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
-export default function AdminUserManage() {
+export default function AdminUserManage(props) {
+  const navigateTo = useNavigate();
   const [updateCount, setUpdateCount] = React.useState(0);
   const USER_ID = new URLSearchParams(window.location.search).get("userID");
-  const USERNAME = new URLSearchParams(window.location.search).get("username");
+  const [USERNAME, setUSERNAME] = React.useState("");
   const [userVideoList, setUserVideoList] = React.useState([]);
+  const adminInfo = props.adminInfo;
 
   React.useEffect(() => {
-    console.log(USER_ID);
+    if (adminInfo.userLevel !== "admin") {
+      navigateTo("/");
+    }
+  }, [adminInfo]);
 
+  React.useEffect(() => {
+    async function fetchUser() {
+      await axios
+        .get(
+          `https://api-quickvid.azurewebsites.net/fetchUser?userID=${USER_ID}`
+        )
+        .then((response) => {
+          // console.log(response.data);
+          setUSERNAME(response.data.username);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
     async function fetchUserVideo() {
       await axios
         .get(
-          "https://api-quickvid.azurewebsites.net/listUserVideo?userID=" +
-            USER_ID
+          `https://api-quickvid.azurewebsites.net/listUserVideo?userID=${USER_ID}`
         )
         .then((response) => {
-          console.log(response.data);
           let temp = response.data.videos;
-          temp.sort((a, b) => b.timestamp.localeCompare(a.timestamp));
-          setUserVideoList(temp);
+          if (temp) {
+            temp.sort((a, b) => b.timestamp.localeCompare(a.timestamp));
+            setUserVideoList(temp);
+          }
+          fetchUser();
         })
         .catch((error) => {
           console.log(error);
         });
     }
     fetchUserVideo();
-  }, [updateCount]);
+  }, [updateCount, USER_ID]);
 
   async function handleDelete(event) {
     if (await window.confirm("Do you want to delete this video?")) {
       let targetVideoID = event.target.value;
-      await axios.delete(`https://api-quickvid.azurewebsites.net/deleteVideoAsset?videoID=${targetVideoID}&userID=${USER_ID}`)
+      await axios
+        .delete(
+          `https://api-quickvid.azurewebsites.net/deleteVideoAsset?videoID=${targetVideoID}&userID=${USER_ID}`
+        )
         .then((response) => {
           window.alert(response.data.message);
           setUpdateCount(updateCount + 1);
@@ -69,6 +93,7 @@ export default function AdminUserManage() {
           <td className="py-2 px-3">
             {/* Delete Video Button */}
             <button
+              id="admin-video-delete-btn"
               className="bg-red-500 hover:bg-red-700 text-white py-1 px-3 w-full rounded-lg"
               value={videoID}
               onClick={handleDelete}
@@ -93,8 +118,11 @@ export default function AdminUserManage() {
     } else {
       return (
         <tr>
-          <td colSpan="6" className="text-center bg-red-700 text-white p-3 font-medium">
-          <i class="bi bi-film"></i> No video uploaded
+          <td
+            colSpan="6"
+            className="text-center bg-red-700 text-white p-3 font-medium"
+          >
+            <i className="bi bi-film"></i> No video uploaded
           </td>
         </tr>
       );
@@ -105,12 +133,16 @@ export default function AdminUserManage() {
     <div>
       <div className="flex flex-col items-center min-h-screen bg-gradient-to-r from-[#80d1e6] to-[#c7ecf7]">
         <Navbar page="admin" />
-        <div className="my-auto pb-3 w-4/5">
-          <a href="/admin-user" className="text-dark-700 hover:text-dark-900">
+        <div className="mt-14 pb-3 w-4/5">
+          <button
+            id="admin-video-back-btn"
+            onClick={() => navigateTo("/admin-user")}
+            className="text-dark-700 hover:text-dark-900"
+          >
             <i className="bi bi-arrow-left-square-fill"></i> Back to user list
-          </a>
+          </button>
           <h1 className="text-4xl font-medium text-dark-500 my-3 align-center">
-          <i class="bi bi-film"></i> Admin Video Management
+            <i className="bi bi-film"></i> Admin Video Management
           </h1>
           <h2 className="text-xl text-dark-500 my-3">
             List of videos uploaded by user{" "}

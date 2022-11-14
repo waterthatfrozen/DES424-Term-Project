@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import axios from "axios";
-// import express from "express"
+import spinner from "./assets/spinner.gif";
 
 export default function UploadPage() {
   const navigateTo = useNavigate();
@@ -15,7 +15,7 @@ export default function UploadPage() {
     videoDescription: "",
   });
   const [file, setFile] = React.useState({});
-  // const app = express();
+  const [showLoader, setShowLoader] = React.useState(false);
 
   React.useEffect(() => {
     if (
@@ -48,6 +48,7 @@ export default function UploadPage() {
     if (formData.file === "") {
       alert("Please insert video file");
     } else {
+      setShowLoader(true);
       await axios
         .post(
           "https://api-quickvid.azurewebsites.net/createVideoAsset",
@@ -56,9 +57,10 @@ export default function UploadPage() {
             headers: { "Content-Type": "multipart/form-data" },
           }
         )
-        .then((res) => {
-          console.log(res);
+        .then(() => {
           alert("Video Uploaded Successfully");
+          setShowLoader(false);
+          navigateTo("/user");
         })
         .catch((err) => {
           console.log(err);
@@ -71,8 +73,15 @@ export default function UploadPage() {
     <div className="flex flex-col min-h-screen max-h-full bg-gradient-to-r from-[#80d1e6] to-[#c7ecf7]">
       <Navbar page="upload" />
 
+      {showLoader && (
+        <div className="flex flex-col justify-center items-center absolute min-h-screen w-screen mt-[70px] bg-gray-300/75">
+          <h1 className="text-4xl font-bold text-gray-700">Uploading</h1>
+          <img src={spinner} alt="spinner" />
+        </div>
+      )}
+
       <form className="flex flex-col p-10" onSubmit={handleSubmit} id="form">
-        <h1 className="self-center ml-5 text-4xl mb-10 text-gray-80">
+        <h1 className="self-center ml-5 text-4xl mb-10 text-gray-800">
           Upload Your Video
         </h1>
 
@@ -80,6 +89,7 @@ export default function UploadPage() {
           <input
             type="file"
             name="file"
+            id="upload-choosefile-btn"
             onChange={handleChange}
             value={formData.file}
             accept="video/*"
@@ -97,15 +107,18 @@ export default function UploadPage() {
             className="w-full h-40  p-4 rounded-xl"
             placeholder="Write description here ..."
             name="videoDescription"
+            id="upload-description-input"
             onChange={handleChange}
             value={formData.videoDescription}
           ></textarea>
-          <p className="text-center mb-5">
+          <p className="text-end mb-5">
             {formData.videoDescription.length}/300
           </p>
         </div>
-
-        <button className=" self-center w-80 md:w-1/2  h-12 mb-4 rounded-xl text-xl text-white bg-sky-400 hover:bg-sky-500">
+        <button
+          id="upload-submit-btn"
+          className=" self-center w-80 md:w-1/2  h-12 mb-4 rounded-xl text-xl text-white bg-sky-400 hover:bg-sky-500"
+        >
           Submit
         </button>
       </form>

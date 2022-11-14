@@ -9,12 +9,7 @@ import UserPage from "./UserPage";
 import UploadPage from "./UploadPage";
 import AdminUserManage from "./AdminUserManage";
 import AdminVideoManage from "./AdminVideoManage";
-
-/*
-You may need an appropriate loader to handle this file type.
-SyntaxError: Unexpected token (1105:8)
- @ ./~/react-router-dom/dist/umd/react-router-dom.development.js 12:125-153
-*/
+import PageNotFound from "./PageNotFound";
 
 function App() {
   const [userInfo, setUserInfo] = React.useState([]);
@@ -24,8 +19,6 @@ function App() {
       sessionStorage.setItem("user-name", userInfo.username);
       sessionStorage.setItem("user-id", userInfo.userID);
     }
-
-    // console.log(sessionStorage.getItem("user-id"));
   }, [userInfo]);
 
   return (
@@ -37,11 +30,26 @@ function App() {
           <Route path="/upload" element={<UploadPage />}></Route>
           <Route
             path="/login"
-            element={<LoginPage userInfo={(data) => setUserInfo(data)} />}
+            element={
+              <LoginPage
+                userInfo={(data) => {
+                  if (data) {
+                    setUserInfo(data);
+                  }
+                }}
+              />
+            }
           ></Route>
           <Route path="/signup" element={<SignupPage />}></Route>
-          <Route path="/admin-user" element={<AdminUserManage />}></Route>
-          <Route path="/admin-video" element={<AdminVideoManage />}></Route>
+          <Route
+            path="/admin-user"
+            element={<AdminUserManage adminInfo={userInfo} />}
+          ></Route>
+          <Route
+            path="/admin-video"
+            element={<AdminVideoManage adminInfo={userInfo} />}
+          ></Route>
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </div>
     </Router>

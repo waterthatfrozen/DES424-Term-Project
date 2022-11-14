@@ -39,32 +39,35 @@
   }
 
   const userInfo = getUserInfo(0)
-  //console.log(userInfo)
 
-  let videoManifest = userInfo.streamingPath
-  let locatorName = userInfo.locatorName
-  let assetName = userInfo.assetName
-  amp.options.flashSS.swf = "//amp.azure.net/libs/amp/1.0.0/techs/StrobeMediaPlayback.2.0.swf";
-  amp.options.silverlightSS.xap = "//amp.azure.net/libs/amp/1.0.0/techs/SmoothStreamingPlayer.xap";
+  if(userInfo.streamingPath){
+    let videoManifest = userInfo.streamingPath
+    let locatorName = userInfo.locatorName
+    let assetName = userInfo.assetName
+    amp.options.flashSS.swf = "//amp.azure.net/libs/amp/1.0.0/techs/StrobeMediaPlayback.2.0.swf";
+    amp.options.silverlightSS.xap = "//amp.azure.net/libs/amp/1.0.0/techs/SmoothStreamingPlayer.xap";
+    
+    var myPlayer = amp('vid1', { /* Options */
+      "nativeControlsForTouch": false,
+      autoplay: false,
+      controls: true,
+      // width: "600",
+      // height: "400",
+      poster: ""
+    }, function() {
+          //console.log('Good to go!');
+          // add an event listener
+          this.addEventListener('ended', function() {
+            //console.log('Finished!');
+        });
+      }
+    );
+    myPlayer.src([{
+      src: videoManifest,
+      type: "application/vnd.ms-sstr+xml"
+    }]);
+  }
+
   
-  var myPlayer = amp('vid1', { /* Options */
-    "nativeControlsForTouch": false,
-    autoplay: false,
-    controls: true,
-    // width: "600",
-    // height: "400",
-    poster: ""
-  }, function() {
-        console.log('Good to go!');
-        // add an event listener
-        this.addEventListener('ended', function() {
-          console.log('Finished!');
-      });
-    }
-  );
-  myPlayer.src([{
-    src: "https://quickvid-aaea.streaming.media.azure.net/"+videoManifest,
-    type: "application/vnd.ms-sstr+xml"
-  }]);
 </script>
 </html>
