@@ -36,12 +36,12 @@ app.get('/listStreamingPath', (req, res) => { require('./listStreamingPath')(req
 app.get('/listUserVideo', (req, res) => { require('./listUserVideo')(req, res); });
 app.get('/fetchVideo', (req, res) => { require('./fetchVideo')(req, res); });
 app.get('/fetchAllUsers', (req, res) => { require('./fetchAllUsers')(req, res); });
+app.get('/fetchUser', (req, res) => { require('./fetchUser')(req, res); });
 
 app.post('/login', (req, res) => { require('./login')(req, res); });
 app.post('/signUp', (req, res) => { require('./signUp')(req, res); });
 app.post('/deactivateUser', (req, res) => { require('./deactivateUser')(req, res); });
 app.post('/activateUser', (req, res) => { require('./activateUser')(req, res); });
-app.post('/videoUpload', (req, res) => { require('./videoUpload')(req, res); });
 
 const createVideoAsset = require('./createVideoAsset');
 //multer({storage: multer.memoryStorage()}).single('file')
