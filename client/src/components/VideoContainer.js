@@ -4,6 +4,7 @@ import heart from "../assets/heart.png";
 import heartFill from "../assets/heart-fill.png";
 import bin from "../assets/bin.png";
 import { useNavigate } from "react-router-dom";
+import VideoPlayer from "./VideoPlayer";
 
 export default function VideoContainer(props) {
   const navigateTo = useNavigate();
@@ -109,12 +110,14 @@ export default function VideoContainer(props) {
             )}
           </div>
 
-          <iframe
+          <VideoPlayer />
+
+          {/* <iframe
             title="videp player"
             src="videoPlayer.html"
             className="h-[420px]"
             text="hi"
-          ></iframe>
+          ></iframe> */}
 
           <span className="ml-2 mb-3 text-lg text-gray-600 line-clamp-3">
             {videoInfo.videoDescription}
