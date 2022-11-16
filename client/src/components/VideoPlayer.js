@@ -1,33 +1,36 @@
 import React from "react";
 
-export default function VideoPlayer() {
+export default function VideoPlayer(props) {
   const playerElement = React.useRef();
+  const streamingPath = props.streamingPath;
 
   React.useEffect(() => {
-    var myPlayer = window.amp(
-      playerElement.current,
-      {
-        /* Options */ nativeControlsForTouch: false,
-        autoplay: false,
-        controls: true,
-        // width: "600",
-        // height: "400",
-        poster: "",
-      },
-      function () {
-        // console.log("Good to go!");
-        // add an event listener
-        this.addEventListener("ended", function () {
-          //console.log('Finished!');
-        });
-      }
-    );
-    myPlayer.src([
-      {
-        src: "https://quickvid-aaea.streaming.media.azure.net/0cc8ff47-6684-4623-97f9-b57b013c7c98/gtws.ism/manifest",
-        type: "application/vnd.ms-sstr+xml",
-      },
-    ]);
+    if (streamingPath) {
+      var myPlayer = window.amp(
+        playerElement.current,
+        {
+          /* Options */ nativeControlsForTouch: false,
+          autoplay: false,
+          controls: true,
+          // width: "600",
+          // height: "400",
+          poster: "",
+        },
+        function () {
+          // console.log("Good to go!");
+          // add an event listener
+          this.addEventListener("ended", function () {
+            //console.log('Finished!');
+          });
+        }
+      );
+      myPlayer.src([
+        {
+          src: streamingPath,
+          type: "application/vnd.ms-sstr+xml",
+        },
+      ]);
+    }
   }, []);
 
   return (

@@ -52,6 +52,7 @@ export default function HomePage() {
         username={videoInfo.username}
         index="1"
         page="home"
+        streamingPath={videoInfo.streamingPath}
       />
     </div>
   );

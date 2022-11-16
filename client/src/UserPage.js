@@ -40,6 +40,7 @@ export default function UserPage() {
           username={userInfo.username}
           index={index}
           showBin="true"
+          streamingPath={info.streamingPath}
         />
       );
     });

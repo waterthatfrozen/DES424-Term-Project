@@ -110,7 +110,7 @@ export default function VideoContainer(props) {
             )}
           </div>
 
-          <VideoPlayer />
+          <VideoPlayer streamingPath={props.streamingPath} />
 
           {/* <iframe
             title="videp player"
