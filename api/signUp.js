@@ -1,10 +1,10 @@
 require('dotenv').config();
 const { MongoClient, ObjectId } = require('mongodb');
 const AZURE_COSMOSDB_CONNECTION_STRING = process.env["AZURE_COSMOSDB_CONNECTION_STRING"];
-const client = new MongoClient(AZURE_COSMOSDB_CONNECTION_STRING);
-client.connect();
 
 module.exports = async function (req,res) {
+    const client = new MongoClient(AZURE_COSMOSDB_CONNECTION_STRING);
+    client.connect();
     if (!AZURE_COSMOSDB_CONNECTION_STRING) {throw Error("Azure Cosmos DB Connection string not found.");}
     if (req.body.username !== "" && req.body.email !== "" && req.body.password !== "") {
         // Get reference of database and collection
@@ -43,8 +43,6 @@ module.exports = async function (req,res) {
                     res.status(200).send({message: "Sign up new user was successfull.", timestamp: timestampString});
                 }catch(error){
                     res.status(500).send({message: "Error while signing up.", error: error});
-                }finally{
-                    client.close();
                 }
             }
         }
