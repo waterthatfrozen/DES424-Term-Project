@@ -31,7 +31,7 @@ export default function VideoPlayer(props) {
         },
       ]);
     }
-  }, []);
+  }, [streamingPath]);
 
   return (
     <div>

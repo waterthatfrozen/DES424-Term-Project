@@ -29,6 +29,7 @@ export default function UserPage() {
     if (userInfo.username) {
       getUserVideo();
     }
+    // eslint-disable-next-line
   }, []);
 
   function createVideoContainer() {
@@ -55,7 +56,8 @@ export default function UserPage() {
     ) {
       navigateTo("/login");
     }
-  }, []);
+    // eslint-disable-next-line
+  }, [navigateTo]);
 
   return (
     <div className="flex flex-col min-h-screen max-h-full bg-gradient-to-r from-[#80d1e6] to-[#c7ecf7]">

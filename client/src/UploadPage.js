@@ -25,7 +25,8 @@ export default function UploadPage() {
     ) {
       navigateTo("/login");
     }
-  }, []);
+    // eslint-disable-next-line
+  }, [navigateTo]);
 
   function handleChange(event) {
     let form = document.querySelector("form");

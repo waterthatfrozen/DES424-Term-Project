@@ -11,7 +11,6 @@ export default function VideoContainer(props) {
   const [videoInfo, setVideoInfo] = React.useState(props.info);
   const currentUserID = sessionStorage.getItem("user-id");
   const [likeVideo, setLikeVideo] = React.useState(false);
-  const [count, setCount] = React.useState(0);
   const showBin = props.showBin;
 
   React.useEffect(() => {
@@ -22,7 +21,8 @@ export default function VideoContainer(props) {
       setLikeVideo(liked);
     }
     setVideoInfo(props.info);
-  }, [count]);
+    // eslint-disable-next-line
+  }, []);
 
   function handleLike() {
     // console.log(currentUserID);
@@ -35,6 +35,7 @@ export default function VideoContainer(props) {
     } else {
       handleSendLike();
     }
+    // eslint-disable-next-line
   }
 
   async function handleSendLike() {

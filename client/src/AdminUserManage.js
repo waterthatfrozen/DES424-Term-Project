@@ -14,7 +14,7 @@ export default function AdminUserManage(props) {
     if (adminInfo.userLevel !== "admin") {
       navigateTo("/");
     }
-  }, [adminInfo]);
+  }, [adminInfo, navigateTo]);
 
   React.useEffect(() => {
     async function fetchUser() {
