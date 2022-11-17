@@ -17,6 +17,7 @@ export default function SignupPage() {
   const [submitOnce, setSubmitOnce] = React.useState(false);
   const [showLoader, setShowLoader] = React.useState(false);
   const [vaildForm, setVaildForm] = React.useState(false);
+  const [vaildEmail, setVaildEmail] = React.useState();
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -40,6 +41,7 @@ export default function SignupPage() {
   }
 
   async function submitUserInfo() {
+    console.log(vaildForm);
     if (vaildForm) {
       setShowLoader(true);
       try {
@@ -86,8 +88,41 @@ export default function SignupPage() {
         formdata.password &&
         vaildPassword === "vaild"
       ) {
+        handleEmail(formdata.email);
+        // return setVaildForm(true);
+      } else {
+        return setVaildForm(false);
+      }
+    }
+
+    function handleEmail(input) {
+      let domainName = "";
+      if (input.includes(" ")) {
+        setVaildEmail(false);
+        return setVaildForm(false);
+      }
+      if (input[0] !== "." && input[input.length - 1] !== ".") {
+        for (let i = 0; i < input.length; i++) {
+          if (input[i] === "@") {
+            domainName = input.slice(i + 1, input.length - 1);
+            break;
+          }
+        }
+
+        if (!domainName.includes(".")) {
+          setVaildEmail(false);
+          return setVaildForm(false);
+        }
+        for (let i = 0; i < domainName.length - 1; i++) {
+          if (input[i] === "." && input[i + 1] === ".") {
+            setVaildEmail(false);
+            return setVaildForm(false);
+          }
+        }
+        setVaildEmail(true);
         return setVaildForm(true);
       } else {
+        setVaildEmail(false);
         return setVaildForm(false);
       }
     }
@@ -188,6 +223,9 @@ export default function SignupPage() {
                   Please input all information!
                 </p>
               )}
+            {!vaildEmail && submitOnce && (
+              <p className="self-end text-red-800">Please input vaild email!</p>
+            )}
           </div>
           {!showLoader ? (
             <button
