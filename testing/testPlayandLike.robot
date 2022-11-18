@@ -29,7 +29,11 @@ ${DELAY}    0.5
 4. Click Play Video
     Sleep    5s
     Click Element    xpath=//*[@id="videoPlayer"]/div[5]
-5. Click Like Video
+5. Click Shuffle to Play Next Video
+    Click Element    xpath=//*[@id="home-shuffle-btn"]
+    Sleep   5s
+    Click Element    xpath=//*[@id="videoPlayer"]/div[5]
+6. Click Like Video
     ${PREV_LIKE_COUNT}    Get Text    xpath=//*[@id="root"]/div/div/div[3]/div/div/div[3]/h4
     ${PREV_LIKE_COUNT}    Convert To Integer    ${PREV_LIKE_COUNT}
     # Log To Console    ${PREV_LIKE_COUNT}
@@ -40,16 +44,16 @@ ${DELAY}    0.5
     # Log To Console    ${AFTER_LIKE_COUNT}
     ${DIFF}=    Set Variable    ${${AFTER_LIKE_COUNT} - ${PREV_LIKE_COUNT}}
     Should Be Equal As Integers    ${DIFF}    1
-6. Click Unlike Video
+7. Click Unlike Video
     ${PREV_LIKE_COUNT}    Get Text    xpath=//*[@id="root"]/div/div/div[3]/div/div/div[3]/h4
     ${PREV_LIKE_COUNT}    Convert To Integer    ${PREV_LIKE_COUNT}
-    Log To Console    ${PREV_LIKE_COUNT}
+    # Log To Console    ${PREV_LIKE_COUNT}
     Click Element    xpath=//*[@id="videocontainer-heart-icon"]
     Sleep    3s
     ${AFTER_LIKE_COUNT}    Get Text    xpath=//*[@id="root"]/div/div/div[3]/div/div/div[3]/h4
     ${AFTER_LIKE_COUNT}    Convert To Integer    ${AFTER_LIKE_COUNT}
-    Log To Console    ${AFTER_LIKE_COUNT}
+    # Log To Console    ${AFTER_LIKE_COUNT}
     ${DIFF}=    Set Variable    ${${PREV_LIKE_COUNT} - ${AFTER_LIKE_COUNT}}
     Should Be Equal As Integers    ${DIFF}    1
-7. Close Browser
+8. Close Browser
     Close Browser
