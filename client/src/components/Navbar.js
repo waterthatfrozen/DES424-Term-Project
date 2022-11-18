@@ -29,6 +29,11 @@ export default function Navbar(props) {
     }
   }
 
+  function logOut() {
+    sessionStorage.setItem("user-name", null);
+    sessionStorage.setItem("user-id", null);
+  }
+
   return (
     <div className="flex justify-between sticky w-full h-[90px] top-0 p-3 pl-10 pr-10 z-10 bg-white">
       <div className="flex justify-center">
@@ -45,7 +50,10 @@ export default function Navbar(props) {
       {props.page === "admin" ? (
         <div
           id="nav-logout-btn"
-          onClick={() => navigateTo("/login")}
+          onClick={() => {
+            logOut();
+            navigateTo("/login");
+          }}
           className="flex items-center cursor-pointer"
         >
           <div className="flex p-3 bg-red-800 rounded-lg">

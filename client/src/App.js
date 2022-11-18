@@ -13,9 +13,10 @@ import PageNotFound from "./PageNotFound";
 
 function App() {
   const [userInfo, setUserInfo] = React.useState([]);
+  let oldSessionID = sessionStorage.getItem("user-id");
 
   React.useEffect(() => {
-    if (userInfo) {
+    if (userInfo.userID && oldSessionID === "null") {
       sessionStorage.setItem("user-name", userInfo.username);
       sessionStorage.setItem("user-id", userInfo.userID);
     }

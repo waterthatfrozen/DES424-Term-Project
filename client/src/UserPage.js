@@ -59,6 +59,11 @@ export default function UserPage() {
     // eslint-disable-next-line
   }, [navigateTo]);
 
+  function logOut() {
+    sessionStorage.setItem("user-name", null);
+    sessionStorage.setItem("user-id", null);
+  }
+
   return (
     <div className="flex flex-col min-h-screen max-h-full bg-gradient-to-r from-[#80d1e6] to-[#c7ecf7]">
       <Navbar page="user" />
@@ -82,7 +87,10 @@ export default function UserPage() {
           </div>
           <div
             id="user-logout-btn"
-            onClick={() => navigateTo("/login")}
+            onClick={() => {
+              logOut();
+              navigateTo("/login");
+            }}
             className="flex items-center cursor-pointer"
           >
             <div className="flex p-2 bg-red-800 rounded-lg">
