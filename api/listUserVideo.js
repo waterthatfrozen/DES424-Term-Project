@@ -17,7 +17,7 @@ module.exports = async (req, res) => {
             } else {
                 let videoCollection = db.collection('videos');
                 let query = { userID: req.query.userID };
-                let result = await videoCollection.find(query).toArray();
+                let result = await videoCollection.find(query).sort({timestamp: -1}).toArray();
                 res.status(200).send({message: "List user video successfully" ,videos: result, totalVideos: result.length});
             }
         } catch (error) {

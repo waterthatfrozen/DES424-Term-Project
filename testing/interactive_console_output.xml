@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.0 (Python 3.11.0 on win32)" generated="20221118 17:59:28.309" rpa="false" schemaversion="3">
+<suite id="s1" name="Robot Interactive Console" source="c:\Users\Paphana\.vscode\extensions\robocorp.robotframework-lsp-1.5.0\src\robotframework_ls\vendored\robotframework_interactive\robot_interactive_console.robot">
+<test id="s1-t1" name="Default Task/Test" line="5">
+<kw name="Interpreter Main Loop" library="MainLoop">
+<kw name="Get Text">
+<var>${PREV_LIKE_COUNT}</var>
+<arg>xpath=//*[@id="root"]/div/div/div[3]/div/div/div[3]/h4</arg>
+<msg timestamp="20221118 17:59:31.192" level="FAIL">No keyword with name 'Get Text' found. Did you mean:
+    BuiltIn.Get Time</msg>
+<status status="FAIL" starttime="20221118 17:59:31.192" endtime="20221118 17:59:31.193"/>
+</kw>
+<kw name="Convert To Integer" library="BuiltIn">
+<var>${PREV_LIKE_COUNT}</var>
+<arg>${PREV_LIKE_COUNT}</arg>
+<doc>Converts the given item to an integer number.</doc>
+<status status="NOT RUN" starttime="20221118 17:59:31.193" endtime="20221118 17:59:31.193"/>
+</kw>
+<kw name="Click Element">
+<arg>xpath=//*[@id="videocontainer-heart-icon"]</arg>
+<status status="NOT RUN" starttime="20221118 17:59:31.196" endtime="20221118 17:59:31.196"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20221118 17:59:31.196" endtime="20221118 17:59:31.196"/>
+</kw>
+<kw name="Get Text">
+<var>${AFTER_LIKE_COUNT}</var>
+<arg>xpath=//*[@id="root"]/div/div/div[3]/div/div/div[3]/h4</arg>
+<status status="NOT RUN" starttime="20221118 17:59:31.198" endtime="20221118 17:59:31.199"/>
+</kw>
+<kw name="Convert To Integer" library="BuiltIn">
+<var>${AFTER_LIKE_COUNT}</var>
+<arg>${AFTER_LIKE_COUNT}</arg>
+<doc>Converts the given item to an integer number.</doc>
+<status status="NOT RUN" starttime="20221118 17:59:31.199" endtime="20221118 17:59:31.199"/>
+</kw>
+<kw name="Should Be Equal As Integers" library="BuiltIn">
+<arg>${PREV_LIKE_COUNT}-1</arg>
+<arg>${AFTER_LIKE_COUNT}</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" starttime="20221118 17:59:31.199" endtime="20221118 17:59:31.200"/>
+</kw>
+<status status="PASS" starttime="20221118 17:59:28.352" endtime="20221118 17:59:31.490"/>
+</kw>
+<status status="PASS" starttime="20221118 17:59:28.352" endtime="20221118 17:59:31.490"/>
+</test>
+<status status="PASS" starttime="20221118 17:59:28.312" endtime="20221118 17:59:31.492"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Robot Interactive Console">Robot Interactive Console</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

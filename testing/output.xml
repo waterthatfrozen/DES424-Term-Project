@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.0 (Python 3.11.0 on win32)" generated="20221118 19:46:09.446" rpa="false" schemaversion="3">
+<suite id="s1" name="Testuploadvideo" source="d:\SIIT-Y4-Work\DES424\DES424-Term-Project\testing\testuploadvideo.robot">
+<test id="s1-t1" name="1. Open Browser" line="19">
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>${URL}</arg>
+<arg>${BROWSER}</arg>
+<arg>options=add_experimental_option("excludeSwitches", ["enable-logging"])</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20221118 19:46:09.936" level="INFO">Opening browser 'chrome' to base url 'http://localhost:3000'.</msg>
+<status status="PASS" starttime="20221118 19:46:09.934" endtime="20221118 19:46:13.825"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20221118 19:46:13.826" endtime="20221118 19:46:14.006"/>
+</kw>
+<kw name="Set Screenshot Directory" library="SeleniumLibrary">
+<arg>./testing/screenshot</arg>
+<doc>Sets the directory for captured screenshots.</doc>
+<status status="PASS" starttime="20221118 19:46:14.007" endtime="20221118 19:46:14.008"/>
+</kw>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<arg>${DELAY}</arg>
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<status status="PASS" starttime="20221118 19:46:14.009" endtime="20221118 19:46:14.010"/>
+</kw>
+<status status="PASS" starttime="20221118 19:46:09.932" endtime="20221118 19:46:14.011"/>
+</test>
+<test id="s1-t2" name="2. Go to Log In Page" line="24">
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>id=nav-user-icon</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20221118 19:46:14.016" level="INFO">Clicking element 'id=nav-user-icon'.</msg>
+<status status="PASS" starttime="20221118 19:46:14.014" endtime="20221118 19:46:15.128"/>
+</kw>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${PAGE_TITLE}</var>
+<arg>xpath=//h1</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20221118 19:46:16.169" level="INFO">${PAGE_TITLE} = Log In</msg>
+<status status="PASS" starttime="20221118 19:46:15.129" endtime="20221118 19:46:16.169"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${PAGE_TITLE}</arg>
+<arg>Log In</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20221118 19:46:16.170" endtime="20221118 19:46:16.171"/>
+</kw>
+<status status="PASS" starttime="20221118 19:46:14.013" endtime="20221118 19:46:16.172"/>
+</test>
+<test id="s1-t3" name="3. Enter Log In Account" line="28">
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>id=login-username-input</arg>
+<arg>${USERNAME}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20221118 19:46:16.176" level="INFO">Typing text 'time' into text field 'id=login-username-input'.</msg>
+<status status="PASS" starttime="20221118 19:46:16.175" endtime="20221118 19:46:17.820"/>
+</kw>
+<kw name="Input Password" library="SeleniumLibrary">
+<arg>id=login-password-input</arg>
+<arg>${PASSWORD}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<msg timestamp="20221118 19:46:17.822" level="INFO">Typing password into text field 'id=login-password-input'.</msg>
+<msg timestamp="20221118 19:46:18.899" level="INFO">Temporally setting log level to: NONE</msg>
+<msg timestamp="20221118 19:46:19.477" level="INFO">Log level changed from NONE to INFO.</msg>
+<status status="PASS" starttime="20221118 19:46:17.821" endtime="20221118 19:46:19.477"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>id=login-signin-btn</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20221118 19:46:19.479" level="INFO">Clicking button 'id=login-signin-btn'.</msg>
+<status status="PASS" starttime="20221118 19:46:19.478" endtime="20221118 19:46:22.086"/>
+</kw>
+<status status="PASS" starttime="20221118 19:46:16.174" endtime="20221118 19:46:22.087"/>
+</test>
+<test id="s1-t4" name="4. Go to Upload Page" line="32">
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>xpath=//*[@id="nav-upload-icon"]</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20221118 19:46:22.090" endtime="20221118 19:46:23.128"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>id=nav-upload-icon</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20221118 19:46:23.130" level="INFO">Clicking element 'id=nav-upload-icon'.</msg>
+<status status="PASS" starttime="20221118 19:46:23.129" endtime="20221118 19:46:24.243"/>
+</kw>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${PAGE_TITLE}</var>
+<arg>xpath=//h1</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20221118 19:46:25.276" level="INFO">${PAGE_TITLE} = Upload Your Video</msg>
+<status status="PASS" starttime="20221118 19:46:24.244" endtime="20221118 19:46:25.276"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${PAGE_TITLE}</arg>
+<arg>Upload Your Video</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20221118 19:46:25.277" endtime="20221118 19:46:25.278"/>
+</kw>
+<status status="PASS" starttime="20221118 19:46:22.089" endtime="20221118 19:46:25.279"/>
+</test>
+<test id="s1-t5" name="5. Upload Video" line="37">
+<kw name="Choose File" library="SeleniumLibrary">
+<arg>id=upload-choosefile-btn</arg>
+<arg>${VIDEO}</arg>
+<doc>Inputs the ``file_path`` into the file input field ``locator``.</doc>
+<msg timestamp="20221118 19:46:25.284" level="INFO">Sending D:\SIIT-Y4-Work\DES424\DES424-Term-Project\testing\file\Azure_Bumper.mp4 to browser.</msg>
+<status status="PASS" starttime="20221118 19:46:25.283" endtime="20221118 19:46:26.340"/>
+</kw>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${VIDEO_NAME}</var>
+<arg>xpath=//*[@id="upload-choosefile-btn"]</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20221118 19:46:27.388" level="INFO">${VIDEO_NAME} = </msg>
+<status status="PASS" starttime="20221118 19:46:26.341" endtime="20221118 19:46:27.388"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>xpath=//*[@id="upload-description-input"]</arg>
+<arg>${VIDEO_DESCRIPTION}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20221118 19:46:27.391" level="INFO">Typing text 'This is a test script for video upload to QikVid App' into text field 'xpath=//*[@id="upload-description-input"]'.</msg>
+<status status="PASS" starttime="20221118 19:46:27.389" endtime="20221118 19:46:29.170"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>id=upload-submit-btn</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20221118 19:46:29.172" level="INFO">Clicking button 'id=upload-submit-btn'.</msg>
+<status status="PASS" starttime="20221118 19:46:29.171" endtime="20221118 19:46:31.778"/>
+</kw>
+<status status="PASS" starttime="20221118 19:46:25.282" endtime="20221118 19:46:31.779"/>
+</test>
+<test id="s1-t6" name="6. Wait for Video to be Upload" line="42">
+<kw name="Alert Should Be Present" library="SeleniumLibrary">
+<arg>timeout=120 s</arg>
+<arg>text=Video Uploaded Successfully</arg>
+<doc>Verifies that an alert is present and by default, accepts it.</doc>
+<msg timestamp="20221118 19:46:31.785" level="INFO">HANDLE::&lt;class 'datetime.timedelta'&gt;::0:02:00</msg>
+<status status="PASS" starttime="20221118 19:46:31.784" endtime="20221118 19:47:09.061"/>
+</kw>
+<status status="PASS" starttime="20221118 19:46:31.783" endtime="20221118 19:47:09.062"/>
+</test>
+<test id="s1-t7" name="7. Verify Video" line="44">
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>xpath=//*[@id="nav-user-icon"]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20221118 19:47:09.066" level="INFO">Clicking element 'xpath=//*[@id="nav-user-icon"]'.</msg>
+<status status="PASS" starttime="20221118 19:47:09.065" endtime="20221118 19:47:10.179"/>
+</kw>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${LOGIN_USERNAME}</var>
+<arg>xpath=//h2</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20221118 19:47:11.217" level="INFO">${LOGIN_USERNAME} = time</msg>
+<status status="PASS" starttime="20221118 19:47:10.180" endtime="20221118 19:47:11.217"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${LOGIN_USERNAME}</arg>
+<arg>${USERNAME}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20221118 19:47:11.218" endtime="20221118 19:47:11.219"/>
+</kw>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${EXPECTED_VIDEO}</var>
+<arg>xpath=//span[contains(text(),'${VIDEO_DESCRIPTION}')]</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20221118 19:47:12.266" level="INFO">${EXPECTED_VIDEO} = This is a test script for video upload to QikVid App</msg>
+<status status="PASS" starttime="20221118 19:47:11.220" endtime="20221118 19:47:12.266"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${EXPECTED_VIDEO}</arg>
+<arg>${VIDEO_DESCRIPTION}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20221118 19:47:12.267" endtime="20221118 19:47:12.268"/>
+</kw>
+<status status="PASS" starttime="20221118 19:47:09.064" endtime="20221118 19:47:12.269"/>
+</test>
+<test id="s1-t8" name="8. Delete Video" line="51">
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>xpath=//*[@id="videocontainer-bin-icon"]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20221118 19:47:12.274" level="INFO">Clicking element 'xpath=//*[@id="videocontainer-bin-icon"]'.</msg>
+<status status="PASS" starttime="20221118 19:47:12.272" endtime="20221118 19:47:13.338"/>
+</kw>
+<kw name="Alert Should Be Present" library="SeleniumLibrary">
+<arg>timeout=120 s</arg>
+<arg>text=Delete video successfully</arg>
+<doc>Verifies that an alert is present and by default, accepts it.</doc>
+<msg timestamp="20221118 19:47:13.341" level="INFO">HANDLE::&lt;class 'datetime.timedelta'&gt;::0:02:00</msg>
+<status status="PASS" starttime="20221118 19:47:13.339" endtime="20221118 19:47:15.861"/>
+</kw>
+<status status="PASS" starttime="20221118 19:47:12.271" endtime="20221118 19:47:15.864"/>
+</test>
+<test id="s1-t9" name="9. Verify Video Deleted" line="54">
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>xpath=//*[@id="nav-user-icon"]</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20221118 19:47:15.868" endtime="20221118 19:47:16.920"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>xpath=//*[@id="nav-user-icon"]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20221118 19:47:16.922" level="INFO">Clicking element 'xpath=//*[@id="nav-user-icon"]'.</msg>
+<status status="PASS" starttime="20221118 19:47:16.921" endtime="20221118 19:47:17.994"/>
+</kw>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${VIDEO_DELETED}</var>
+<arg>xpath=//span</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20221118 19:47:19.030" level="INFO">${VIDEO_DELETED} = </msg>
+<status status="PASS" starttime="20221118 19:47:17.995" endtime="20221118 19:47:19.030"/>
+</kw>
+<kw name="Should Not Contain" library="BuiltIn">
+<arg>${VIDEO_DELETED}</arg>
+<arg>${VIDEO_DESCRIPTION}</arg>
+<doc>Fails if ``container`` contains ``item`` one or more times.</doc>
+<status status="PASS" starttime="20221118 19:47:19.031" endtime="20221118 19:47:19.032"/>
+</kw>
+<status status="PASS" starttime="20221118 19:47:15.868" endtime="20221118 19:47:19.033"/>
+</test>
+<test id="s1-t10" name="10. Log out" line="59">
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>id=user-logout-btn</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20221118 19:47:19.036" level="INFO">Clicking element 'id=user-logout-btn'.</msg>
+<status status="PASS" starttime="20221118 19:47:19.035" endtime="20221118 19:47:20.114"/>
+</kw>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${PAGE_TITLE}</var>
+<arg>xpath=//h1</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20221118 19:47:21.147" level="INFO">${PAGE_TITLE} = Log In</msg>
+<status status="PASS" starttime="20221118 19:47:20.115" endtime="20221118 19:47:21.147"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${PAGE_TITLE}</arg>
+<arg>Log In</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20221118 19:47:21.148" endtime="20221118 19:47:21.149"/>
+</kw>
+<status status="PASS" starttime="20221118 19:47:19.035" endtime="20221118 19:47:21.150"/>
+</test>
+<test id="s1-t11" name="11. Close Browser" line="63">
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20221118 19:47:21.153" endtime="20221118 19:47:24.113"/>
+</kw>
+<status status="PASS" starttime="20221118 19:47:21.152" endtime="20221118 19:47:24.114"/>
+</test>
+<status status="PASS" starttime="20221118 19:46:09.456" endtime="20221118 19:47:24.117"/>
+</suite>
+<statistics>
+<total>
+<stat pass="11" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="11" fail="0" skip="0" id="s1" name="Testuploadvideo">Testuploadvideo</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
