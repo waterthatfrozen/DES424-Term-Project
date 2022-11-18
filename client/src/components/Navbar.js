@@ -30,8 +30,8 @@ export default function Navbar(props) {
   }
 
   function logOut() {
-    sessionStorage.setItem("user-name", null);
-    sessionStorage.setItem("user-id", null);
+    sessionStorage.removeItem("user-name");
+    sessionStorage.removeItem("user-id");
   }
 
   return (

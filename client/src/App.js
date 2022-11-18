@@ -16,11 +16,12 @@ function App() {
   let oldSessionID = sessionStorage.getItem("user-id");
 
   React.useEffect(() => {
-    if (userInfo.userID && oldSessionID === "null") {
+    console.log(oldSessionID);
+    if (userInfo.userID && !oldSessionID) {
       sessionStorage.setItem("user-name", userInfo.username);
       sessionStorage.setItem("user-id", userInfo.userID);
     }
-  }, [userInfo]);
+  }, [userInfo, oldSessionID]);
 
   return (
     <Router>
