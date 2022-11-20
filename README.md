@@ -184,11 +184,12 @@ We used JIRA to manage our project. The link to the JIRA board can be found [her
 __Note:__ The JIRA board is only accessible to the course instructor and the team members.
 
 ## Deliverables
-*These listed document is only accessible with SIIT email account*  
+Please click the box in front of each topic to access the listed document.
+*These listed document is only accessible with ***SIIT*** email account*  
 [/] = Completed, [O] = Ongoing
 - [[/]](https://drive.google.com/file/d/1h-T9NTyA9GwxvaMqUdwn2v7MWOLPTha9/view?usp=sharing) Kick-off Project Report
 - [[/]](https://drive.google.com/file/d/134FEbOzQIUFgJ_oEYinnjs4Kawbmnucr/view?usp=sharing) Kick-off Project Presentation
-- [O] Final Project Report
+- [[/]](https://drive.google.com/file/d/17IAO09pFB6VL-ch35T2H7y-4rDKazro9/view?usp=sharing) Final Project Report
 - [O] Final Project Presentation
-- [O] User Manual
+- [[/]](https://drive.google.com/file/d/1uoUwIvTd58zyP-CuEygsWvEFG8TCxXgr/view?usp=sharing) User Manual
 ---
