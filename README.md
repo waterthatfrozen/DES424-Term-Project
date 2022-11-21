@@ -186,10 +186,9 @@ __Note:__ The JIRA board is only accessible to the course instructor and the tea
 ## Deliverables
 Please click the box in front of each topic to access the listed document.
 *These listed document is only accessible with ***SIIT*** email account*  
-[/] = Completed, [O] = Ongoing
 - [[/]](https://drive.google.com/file/d/1h-T9NTyA9GwxvaMqUdwn2v7MWOLPTha9/view?usp=sharing) Kick-off Project Report
 - [[/]](https://drive.google.com/file/d/134FEbOzQIUFgJ_oEYinnjs4Kawbmnucr/view?usp=sharing) Kick-off Project Presentation
 - [[/]](https://drive.google.com/file/d/17IAO09pFB6VL-ch35T2H7y-4rDKazro9/view?usp=sharing) Final Project Report
-- [O] Final Project Presentation
+- [[/]](https://drive.google.com/file/d/1bPUdsWznhZyl_C9msrJdH8oQIjjZu2tm/view?usp=sharing) Final Project Presentation
 - [[/]](https://drive.google.com/file/d/1uoUwIvTd58zyP-CuEygsWvEFG8TCxXgr/view?usp=sharing) User Manual
 ---
