@@ -14,11 +14,13 @@ export default function AdminUserManage(props) {
 
   React.useEffect(() => {
     let sessionID = sessionStorage.getItem("user-id");
-    if (
-      // adminInfo.userLevel !== "admin" ||
-      sessionID !== "636fe2f49778302858c4c588"
-    ) {
-      navigateTo("/");
+    if (sessionID) {
+      if (
+        // adminInfo.userLevel !== "admin"
+        sessionID !== "636fe2f49778302858c4c588"
+      ) {
+        navigateTo("/");
+      }
     }
   }, [adminInfo, navigateTo]);
 

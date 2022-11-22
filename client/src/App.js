@@ -16,7 +16,6 @@ function App() {
   let oldSessionID = sessionStorage.getItem("user-id");
 
   React.useEffect(() => {
-    console.log(oldSessionID);
     if (userInfo.userID && !oldSessionID) {
       sessionStorage.setItem("user-name", userInfo.username);
       sessionStorage.setItem("user-id", userInfo.userID);
