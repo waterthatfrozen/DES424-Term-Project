@@ -101,6 +101,7 @@ export default function SignupPage() {
         setVaildEmail(false);
         return setVaildForm(false);
       }
+
       if (input[0] !== "." && input[input.length - 1] !== ".") {
         for (let i = 0; i < input.length; i++) {
           if (input[i] === "@") {
@@ -112,12 +113,6 @@ export default function SignupPage() {
         if (!domainName.includes(".")) {
           setVaildEmail(false);
           return setVaildForm(false);
-        }
-        for (let i = 0; i < domainName.length - 1; i++) {
-          if (input[i] === "." && input[i + 1] === ".") {
-            setVaildEmail(false);
-            return setVaildForm(false);
-          }
         }
         setVaildEmail(true);
         return setVaildForm(true);
@@ -223,7 +218,7 @@ export default function SignupPage() {
                   Please input all information!
                 </p>
               )}
-            {!vaildEmail && submitOnce && (
+            {vaildEmail === false && submitOnce && (
               <p className="self-end text-red-800">Please input vaild email!</p>
             )}
           </div>
