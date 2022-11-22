@@ -1,0 +1,9 @@
+{
+  "routes": [
+    {
+      "route": "/*",
+      "redirect": "index.html",
+      "statusCode": 301
+    }
+  ]
+}
